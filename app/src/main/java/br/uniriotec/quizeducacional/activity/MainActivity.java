@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import br.uniriotec.quizeducacional.R;
+import br.uniriotec.quizeducacional.constants.Keys;
 import br.uniriotec.quizeducacional.model.QuestionBean;
 import br.uniriotec.quizeducacional.model.QuestionResultBean;
 import br.uniriotec.quizeducacional.model.QuizResultBean;
@@ -17,10 +18,6 @@ import butterknife.OnClick;
 import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
-
-  public static final String KEY_QUESTION = "kQuestionBean";
-  public static final String KEY_QUIZ_RESULT = "kQuizResultBean";
-  public static final String KEY_QUESTION_NUMBER = "kQuestionsNumber";
 
   @InjectView(R.id.quiz_question_text) TextView question;
   @InjectView(R.id.quiz_answer1_btn) Button answer1;
@@ -48,9 +45,9 @@ public class MainActivity extends ActionBarActivity {
     Bundle extras = getIntent().getExtras();
     QuestionBean question;
     if (extras != null) {
-      question = (QuestionBean) extras.getSerializable(KEY_QUESTION);
-      quizResult = (QuizResultBean) extras.getSerializable(KEY_QUIZ_RESULT);
-      questionNumber = extras.getInt(KEY_QUESTION_NUMBER);
+      question = (QuestionBean) extras.getSerializable(Keys.KEY_QUESTION);
+      quizResult = (QuizResultBean) extras.getSerializable(Keys.KEY_QUIZ_RESULT);
+      questionNumber = extras.getInt(Keys.KEY_QUESTION_NUMBER);
       if (question != null) {
         makeQuestionScreen(question);
       }
@@ -127,20 +124,23 @@ public class MainActivity extends ActionBarActivity {
     questionResultBean = new QuestionResultBean(rightAnswer, answer, questionValue);
     quizResult.questionResults.add(questionResultBean);
 
-    if (questionNumber <= 3) {
-      questionNumber++;
-    } else {
-      questionNumber = 1;
-    }
-    nextQuestion = QuestionGenerator.generateQuestionList().get(questionNumber - 1);
-
-    Intent intent = new Intent(this, MainActivity.class);
     Bundle bundle = new Bundle();
-    bundle.putSerializable(KEY_QUIZ_RESULT, quizResult);
-    bundle.putSerializable(KEY_QUESTION, nextQuestion);
-    bundle.putInt(KEY_QUESTION_NUMBER, questionNumber);
+    Intent intent;
 
-    intent.putExtras(bundle);
+    if (questionNumber < QuestionGenerator.generateQuestionList().size()) {
+      questionNumber++;
+      nextQuestion = QuestionGenerator.generateQuestionList().get(questionNumber - 1);
+      intent = new Intent(this, MainActivity.class);
+      bundle.putSerializable(Keys.KEY_QUIZ_RESULT, quizResult);
+      bundle.putSerializable(Keys.KEY_QUESTION, nextQuestion);
+      bundle.putInt(Keys.KEY_QUESTION_NUMBER, questionNumber);
+      intent.putExtras(bundle);
+    } else {
+      intent = new Intent(this, ResultActivity.class);
+      bundle.putSerializable(Keys.KEY_QUIZ_RESULT, quizResult);
+      intent.putExtras(bundle);
+    }
+
     startActivity(intent);
     this.finish();
   }
