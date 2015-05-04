@@ -2,4 +2,6 @@
 <resources>
     <color name="gray">#969696</color>
     <color name="white">#fff</color>
+    <color name="green">#1de9b6</color>
+    <color name="barely_white">#f5f5f5</color>
 </resources>
