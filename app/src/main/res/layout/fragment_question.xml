@@ -1,0 +1,90 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@color/transparent"
+             tools:context="br.uniriotec.quizeducacional.fragment.QuestionFragment">
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="4dp"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="15dp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/question_header_layout"
+                android:layout_width="330dp"
+                android:layout_height="140dp"
+                android:orientation="vertical"
+                android:background="@color/gray">
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:background="@color/gray"
+                    android:id="@+id/question_header_text"
+                    android:textColor="@color/white"
+                    android:textSize="24dp"
+                    android:text="Pergunta"
+                    android:gravity="bottom"/>
+            </LinearLayout>
+
+
+
+            <Button
+                android:id="@+id/question_answer1_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/barely_white"
+                android:text="Resposta 1"/>
+
+            <Button
+                android:id="@+id/question_answer2_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/barely_white"
+                android:text="Resposta 2"/>
+
+            <Button
+                android:id="@+id/question_answer3_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/barely_white"
+                android:text="Resposta 3"/>
+
+            <Button
+                android:id="@+id/question_answer4_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/barely_white"
+                android:text="Resposta 4"/>
+
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</FrameLayout>

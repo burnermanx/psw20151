@@ -2,6 +2,7 @@ package br.uniriotec.quizeducacional.activity;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -13,7 +14,7 @@ import br.uniriotec.quizeducacional.model.QuizResultBean;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class ResultActivity extends ActionBarActivity {
+public class ResultActivity extends AppCompatActivity {
 
     private int score;
 

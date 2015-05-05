@@ -1,8 +1,8 @@
 package br.uniriotec.quizeducacional.activity;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,7 +17,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import java.util.List;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
   @InjectView(R.id.quiz_question_text) TextView question;
   @InjectView(R.id.quiz_answer1_btn) Button answer1;
@@ -45,7 +45,7 @@ public class MainActivity extends ActionBarActivity {
     Bundle extras = getIntent().getExtras();
     QuestionBean question;
     if (extras != null) {
-      question = (QuestionBean) extras.getSerializable(Keys.KEY_QUESTION);
+      question = (QuestionBean) extras.getSerializable(Keys.KEY_QUESTION_BEAN);
       quizResult = (QuizResultBean) extras.getSerializable(Keys.KEY_QUIZ_RESULT);
       questionNumber = extras.getInt(Keys.KEY_QUESTION_NUMBER);
       if (question != null) {
@@ -132,7 +132,7 @@ public class MainActivity extends ActionBarActivity {
       nextQuestion = QuestionGenerator.generateQuestionList().get(questionNumber - 1);
       intent = new Intent(this, MainActivity.class);
       bundle.putSerializable(Keys.KEY_QUIZ_RESULT, quizResult);
-      bundle.putSerializable(Keys.KEY_QUESTION, nextQuestion);
+      bundle.putSerializable(Keys.KEY_QUESTION_BEAN, nextQuestion);
       bundle.putInt(Keys.KEY_QUESTION_NUMBER, questionNumber);
       intent.putExtras(bundle);
     } else {
