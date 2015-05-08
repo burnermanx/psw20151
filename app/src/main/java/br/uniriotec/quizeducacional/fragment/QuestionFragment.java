@@ -2,7 +2,7 @@ package br.uniriotec.quizeducacional.fragment;
 
 
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import br.uniriotec.quizeducacional.R;
+import br.uniriotec.quizeducacional.activity.QuizActivity;
 import br.uniriotec.quizeducacional.constants.Keys;
 import br.uniriotec.quizeducacional.model.QuestionBean;
 import butterknife.ButterKnife;
@@ -35,6 +36,14 @@ public class QuestionFragment extends Fragment {
 
     public QuestionFragment() {
         // Required empty public constructor
+    }
+
+    public static QuestionFragment getFragment(QuestionBean questionBean) {
+        QuestionFragment fragment = new QuestionFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(Keys.KEY_QUESTION_BEAN, questionBean);
+        fragment.setArguments(args);
+        return fragment;
     }
 
 
@@ -69,6 +78,13 @@ public class QuestionFragment extends Fragment {
         button.setBackgroundColor(getResources().getColor(R.color.green));
     }
 
+    private void makeButtonAction(Button button) {
+        decolorizeButtons();
+        colorizeAnswer(button);
+        answer = button.getText().toString();
+        ((QuizActivity)getActivity()).removeCurrentQuestion();
+    }
+
     private void decolorizeButtons() {
         btnAnswer1.setBackgroundColor(getResources().getColor(R.color.barely_white));
         btnAnswer2.setBackgroundColor(getResources().getColor(R.color.barely_white));
@@ -77,27 +93,19 @@ public class QuestionFragment extends Fragment {
     }
 
     @OnClick(R.id.question_answer1_btn) public void selectAnswer1() {
-        decolorizeButtons();
-        colorizeAnswer(btnAnswer1);
-        answer = btnAnswer1.getText().toString();
+        makeButtonAction(btnAnswer1);
     }
 
     @OnClick(R.id.question_answer2_btn) public void selectAnswer2() {
-        decolorizeButtons();
-        colorizeAnswer(btnAnswer2);
-        answer = btnAnswer2.getText().toString();
+        makeButtonAction(btnAnswer2);
     }
 
     @OnClick(R.id.question_answer3_btn) public void selectAnswer3() {
-        decolorizeButtons();
-        colorizeAnswer(btnAnswer3);
-        answer = btnAnswer3.getText().toString();
+        makeButtonAction(btnAnswer3);
     }
 
     @OnClick(R.id.question_answer4_btn) public void selectAnswer4() {
-        decolorizeButtons();
-        colorizeAnswer(btnAnswer4);
-        answer = btnAnswer4.getText().toString();
+        makeButtonAction(btnAnswer4);
     }
 
 

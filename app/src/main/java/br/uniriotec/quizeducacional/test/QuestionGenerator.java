@@ -35,7 +35,7 @@ public class QuestionGenerator {
     questions.add(question1);
 
     //Question 2
-    question = "Qual a raíz quadrada de 9?";
+    question = "Qual a raiz quadrada de 9?";
     rightAnswer = "3";
 
     question2Answers.add("18");
