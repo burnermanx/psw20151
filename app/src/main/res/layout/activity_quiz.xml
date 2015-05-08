@@ -25,6 +25,21 @@
             android:fontFamily="sans-serif-light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:id="@+id/activity_quiz_layout_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:visibility="gone">
+            <TextView
+                android:text="FIM DO QUIZ!"
+                android:textSize="@dimen/abc_text_size_headline_material"
+                android:fontFamily="sans-serif-light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
+        </LinearLayout>
     </RelativeLayout>
 
 </RelativeLayout>

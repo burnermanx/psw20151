@@ -11,7 +11,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.antonyt.infiniteviewpager.InfinitePagerAdapter;
 
 import java.util.List;
 
@@ -26,6 +31,7 @@ public class QuizActivity extends AppCompatActivity {
 
     @InjectView(R.id.pager) ViewPager mViewPager;
     @InjectView(R.id.activity_quiz_module_name) TextView mTextModuleName;
+    @InjectView(R.id.activity_quiz_layout_empty) LinearLayout mEmptyLayout;
     private PagerAdapter mPagerAdapter;
     private List<QuestionBean> mQuestionList = QuestionGenerator.generateQuestionList();
 
@@ -50,9 +56,22 @@ public class QuizActivity extends AppCompatActivity {
     public void removeCurrentQuestion() {
         int currentItem = mViewPager.getCurrentItem();
         mQuestionList.remove(currentItem);
-
         mPagerAdapter.notifyDataSetChanged();
+        if (mQuestionList.isEmpty()) {
+            showEmptyQuizView();
+        } else {
+            hideEmptyQuizView();
+        }
     }
+
+    private void showEmptyQuizView() {
+        mEmptyLayout.setVisibility(View.VISIBLE);
+    }
+
+    private void hideEmptyQuizView() {
+        mEmptyLayout.setVisibility(View.GONE);
+    }
+
 
     private class SlidingPagerAdapter extends FragmentStatePagerAdapter {
 
@@ -74,5 +93,7 @@ public class QuizActivity extends AppCompatActivity {
         public int getItemPosition(Object object) {
             return PagerAdapter.POSITION_NONE;
         }
+
+
     }
 }
