@@ -59,6 +59,8 @@ public class QuizActivity extends AppCompatActivity {
         mPagerAdapter = new SlidingPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mPagerAdapter);
         mIndicator.setViewPager(mViewPager);
+
+        mIndicator.setFillColor(getResources().getColor(R.color.math_primary_color));
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
@@ -134,6 +136,7 @@ public class QuizActivity extends AppCompatActivity {
         hideMenu = true;
         mViewPager.setVisibility(View.GONE);
         mSendButton.setVisibility(View.GONE);
+        mIndicator.setVisibility(View.GONE);
         invalidateOptionsMenu();
         mEmptyLayout.setVisibility(View.VISIBLE);
     }
@@ -142,6 +145,7 @@ public class QuizActivity extends AppCompatActivity {
         hideMenu = false;
         mEmptyLayout.setVisibility(View.GONE);
         invalidateOptionsMenu();
+        mIndicator.setVisibility(View.VISIBLE);
         mSendButton.setVisibility(View.VISIBLE);
         mViewPager.setVisibility(View.VISIBLE);
     }

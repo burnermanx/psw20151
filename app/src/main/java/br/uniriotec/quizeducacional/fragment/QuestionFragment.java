@@ -53,6 +53,8 @@ public class QuestionFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_question, container, false);
         ButterKnife.inject(this, view);
 
+        headerLayout.setBackgroundColor(getActivity().getResources().getColor(R.color.math_primary_color));
+
         Bundle extras = getArguments();
         if (extras != null) {
             if (extras.containsKey(Keys.KEY_QUESTION_BEAN)) {
