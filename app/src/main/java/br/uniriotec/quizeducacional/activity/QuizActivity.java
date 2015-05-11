@@ -25,6 +25,7 @@ import br.uniriotec.quizeducacional.model.QuestionResultBean;
 import br.uniriotec.quizeducacional.model.QuizResultBean;
 
 import butterknife.OnClick;
+import com.viewpagerindicator.CirclePageIndicator;
 import java.util.List;
 
 import br.uniriotec.quizeducacional.R;
@@ -41,6 +42,7 @@ public class QuizActivity extends AppCompatActivity {
     @InjectView(R.id.activity_quiz_layout_empty) LinearLayout mEmptyLayout;
     @InjectView(R.id.quiz_toolbar) Toolbar mToolbar;
     @InjectView(R.id.quiz_send_btn) Button mSendButton;
+    @InjectView(R.id.indicator) CirclePageIndicator mIndicator;
 
     private PagerAdapter mPagerAdapter;
     private List<QuestionBean> mQuestionList = QuestionGenerator.generateQuestionList();
@@ -56,6 +58,7 @@ public class QuizActivity extends AppCompatActivity {
 
         mPagerAdapter = new SlidingPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mPagerAdapter);
+        mIndicator.setViewPager(mViewPager);
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
