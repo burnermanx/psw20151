@@ -33,6 +33,7 @@ public class QuestionFragment extends Fragment {
     String rightAnswer;
     int questionValue;
     QuestionBean mQuestionBean;
+    int mModuleColor;
 
     public QuestionFragment() {
         // Required empty public constructor
@@ -53,7 +54,8 @@ public class QuestionFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_question, container, false);
         ButterKnife.inject(this, view);
 
-        headerLayout.setBackgroundColor(getActivity().getResources().getColor(R.color.math_primary_color));
+        mModuleColor = getActivity().getResources().getColor(R.color.math_primary_color);
+        headerLayout.setBackgroundColor(mModuleColor);
 
         Bundle extras = getArguments();
         if (extras != null) {
@@ -98,7 +100,7 @@ public class QuestionFragment extends Fragment {
     }
 
     private void colorizeAnswer(Button button) {
-        button.setBackgroundColor(getResources().getColor(R.color.green));
+        button.setBackgroundColor(mModuleColor);
     }
 
     private void makeButtonAction(Button button) {

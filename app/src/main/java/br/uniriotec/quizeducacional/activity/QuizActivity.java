@@ -43,6 +43,7 @@ public class QuizActivity extends AppCompatActivity {
     @InjectView(R.id.quiz_toolbar) Toolbar mToolbar;
     @InjectView(R.id.quiz_send_btn) Button mSendButton;
     @InjectView(R.id.indicator) CirclePageIndicator mIndicator;
+    @InjectView(R.id.quiz_txt_end) TextView mTextEndQuiz;
 
     private PagerAdapter mPagerAdapter;
     private List<QuestionBean> mQuestionList = QuestionGenerator.generateQuestionList();
@@ -133,12 +134,25 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void showEmptyQuizView() {
+        int finalScore = calculateScore();
+        String message = mTextEndQuiz.getText() + "\n Voce fez " + String.valueOf(finalScore) + " pontos.";
+        mTextEndQuiz.setText(message);
         hideMenu = true;
         mViewPager.setVisibility(View.GONE);
         mSendButton.setVisibility(View.GONE);
         mIndicator.setVisibility(View.GONE);
         invalidateOptionsMenu();
         mEmptyLayout.setVisibility(View.VISIBLE);
+    }
+
+    private int calculateScore() {
+        int score = 0;
+        for (QuestionResultBean result : mQuizResultBean.questionResults) {
+            if (result.selectedAnswer.contentEquals(result.rightAnswer)) {
+                score += result.questionValue;
+            }
+        }
+        return score;
     }
 
     private void hideEmptyQuizView() {

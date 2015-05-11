@@ -48,9 +48,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
+            android:orientation="horizontal"
             android:visibility="gone">
             <TextView
                 android:text="FIM DO QUIZ!"
+                android:id="@+id/quiz_txt_end"
                 android:textSize="@dimen/abc_text_size_headline_material"
                 android:fontFamily="sans-serif-light"
                 android:layout_width="match_parent"
