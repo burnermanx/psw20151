@@ -7,6 +7,7 @@ import java.util.List;
  * Created by Burner on 04/05/2015.
  */
 public class QuestionBean implements Serializable {
+  private long qid;
   private String question;
   private String rightAnswer;
   private List<String> answers;
@@ -14,6 +15,10 @@ public class QuestionBean implements Serializable {
 
   public String getQuestion() {
     return question;
+  }
+
+  public long getQid() {
+    return qid;
   }
 
   public String getRightAnswer() {
@@ -28,8 +33,9 @@ public class QuestionBean implements Serializable {
     return questionValue;
   }
 
-  public QuestionBean(String question, String rightAnswer, List<String> answers,
+  public QuestionBean(long qid, String question, String rightAnswer, List<String> answers,
       int questionValue) {
+    this.qid = qid;
     this.question = question;
     this.rightAnswer = rightAnswer;
     this.answers = answers;

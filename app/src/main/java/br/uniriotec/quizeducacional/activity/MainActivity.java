@@ -120,28 +120,5 @@ public class MainActivity extends AppCompatActivity {
     answer = answer4.getText().toString();
   }
 
-  @OnClick(R.id.quiz_send_btn) public void sendAnswer() {
-    questionResultBean = new QuestionResultBean(rightAnswer, answer, questionValue);
-    quizResult.questionResults.add(questionResultBean);
 
-    Bundle bundle = new Bundle();
-    Intent intent;
-
-    if (questionNumber < QuestionGenerator.generateQuestionList().size()) {
-      questionNumber++;
-      nextQuestion = QuestionGenerator.generateQuestionList().get(questionNumber - 1);
-      intent = new Intent(this, MainActivity.class);
-      bundle.putSerializable(Keys.KEY_QUIZ_RESULT, quizResult);
-      bundle.putSerializable(Keys.KEY_QUESTION_BEAN, nextQuestion);
-      bundle.putInt(Keys.KEY_QUESTION_NUMBER, questionNumber);
-      intent.putExtras(bundle);
-    } else {
-      intent = new Intent(this, ResultActivity.class);
-      bundle.putSerializable(Keys.KEY_QUIZ_RESULT, quizResult);
-      intent.putExtras(bundle);
-    }
-
-    startActivity(intent);
-    this.finish();
-  }
 }

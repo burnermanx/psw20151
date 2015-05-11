@@ -61,7 +61,28 @@ public class QuestionFragment extends Fragment {
             }
         }
 
+        if (savedInstanceState != null) {
+            answer = savedInstanceState.getString(Keys.KEY_SELECTED_ANSWER, "");
+            if (btnAnswer1.getText().toString().contentEquals(answer)) {
+                colorizeAnswer(btnAnswer1);
+            }
+            if (btnAnswer2.getText().toString().contentEquals(answer)) {
+                colorizeAnswer(btnAnswer2);
+            }
+            if (btnAnswer3.getText().toString().contentEquals(answer)) {
+                colorizeAnswer(btnAnswer3);
+            }
+            if (btnAnswer4.getText().toString().contentEquals(answer)) {
+                colorizeAnswer(btnAnswer4);
+            }
+        }
+
         return view;
+    }
+
+    @Override public void onSaveInstanceState(Bundle outState) {
+        outState.putString(Keys.KEY_SELECTED_ANSWER, answer);
+        super.onSaveInstanceState(outState);
     }
 
     private void makeQuestionScreen(QuestionBean questionBean) {
@@ -82,7 +103,8 @@ public class QuestionFragment extends Fragment {
         decolorizeButtons();
         colorizeAnswer(button);
         answer = button.getText().toString();
-        ((QuizActivity)getActivity()).removeCurrentQuestion();
+        ((QuizActivity)getActivity()).insertAnswer(mQuestionBean.getQid(), mQuestionBean.getRightAnswer(), answer, mQuestionBean.getQuestionValue());
+        //((QuizActivity)getActivity()).removeCurrentQuestion();
     }
 
     private void decolorizeButtons() {

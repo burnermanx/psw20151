@@ -9,6 +9,7 @@ import java.util.List;
  */
 public class QuestionGenerator {
   public static List<QuestionBean> generateQuestionList() {
+    long qid;
     String question;
     String rightAnswer;
     List<String> question1Answers = new ArrayList<>();
@@ -24,6 +25,7 @@ public class QuestionGenerator {
 
 
     //Question 1
+    qid = 1;
     question = "Quanto é 1+1?";
     rightAnswer = "2";
 
@@ -31,10 +33,11 @@ public class QuestionGenerator {
     question1Answers.add("3");
     question1Answers.add("2");
     question1Answers.add("10");
-    question1 = new QuestionBean(question, rightAnswer, question1Answers, 10);
+    question1 = new QuestionBean(qid, question, rightAnswer, question1Answers, 10);
     questions.add(question1);
 
     //Question 2
+    qid = 2;
     question = "Qual a raiz quadrada de 9?";
     rightAnswer = "3";
 
@@ -42,10 +45,11 @@ public class QuestionGenerator {
     question2Answers.add("3");
     question2Answers.add("0");
     question2Answers.add("6");
-    question2 = new QuestionBean(question, rightAnswer, question2Answers, 10);
+    question2 = new QuestionBean(qid, question, rightAnswer, question2Answers, 10);
     questions.add(question2);
 
     //Question 3
+    qid = 3;
     question = "Quanto é 5 elevado ao quadrado?";
     rightAnswer = "25";
 
@@ -53,10 +57,11 @@ public class QuestionGenerator {
     question3Answers.add("1");
     question3Answers.add("10");
     question3Answers.add("25");
-    question3 = new QuestionBean(question, rightAnswer, question3Answers, 10);
+    question3 = new QuestionBean(qid, question, rightAnswer, question3Answers, 10);
     questions.add(question3);
 
     //Question 4
+    qid = 4;
     question = "Quantos graus tem um círculo?";
     rightAnswer = "360 graus";
 
@@ -64,7 +69,7 @@ public class QuestionGenerator {
     question4Answers.add("45 graus");
     question4Answers.add("360 graus");
     question4Answers.add("0 grau");
-    question4 = new QuestionBean(question, rightAnswer, question4Answers, 10);
+    question4 = new QuestionBean(qid, question, rightAnswer, question4Answers, 10);
     questions.add(question4);
 
     return questions;

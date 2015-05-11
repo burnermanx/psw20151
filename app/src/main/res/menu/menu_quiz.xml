@@ -1,9 +1,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto"
-      xmlns:tools="http://schemas.android.com/tools"
-      tools:context="br.uniriotec.quizeducacional.activity.QuizActivity">
-    <item android:id="@+id/action_settings"
-          android:title="@string/action_settings"
-          android:orderInCategory="100"
-          app:showAsAction="never"/>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="br.uniriotec.quizeducacional.activity.QuizActivity">
+  <item
+      android:id="@+id/menu_action_previous_question"
+      android:title="Anterior"
+      app:showAsAction="always"
+      />
+  <item
+      android:id="@+id/menu_action_next_question"
+      android:title="Próxima"
+      app:showAsAction="always"
+      />
 </menu>

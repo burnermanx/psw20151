@@ -6,6 +6,11 @@
     <string name="title_activity_result">Resultado</string>
     <string name="title_activity_quiz">QuizActivity</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="quiz_dialog_confirm_send">Você confirma o envio do seu questionário?</string>
+
+    <string name="dialog_header_attention">Atenção</string>
+    <string name="dialog_button_send">Enviar</string>
+    <string name="dialog_button_cancel">Cancelar</string>
+
 </resources>

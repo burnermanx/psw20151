@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <color name ="style_color_primary">#2196F3</color>
+    <color name ="style_color_primary_dark">#1976D2</color>
+    <color name ="style_color_accent">#8BC34A</color>
+
+    <color name="btn_default_light_normal">#00000000</color>
+    <color name="btn_default_light_pressed">#40ffffff</color>
+
     <color name="gray">#969696</color>
     <color name="white">#fff</color>
     <color name="green">#1de9b6</color>

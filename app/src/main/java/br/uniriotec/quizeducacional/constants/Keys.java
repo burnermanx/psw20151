@@ -8,4 +8,5 @@ public class Keys {
     public static final String KEY_QUESTION_BEAN = "kQuestionBean";
     public static final String KEY_QUIZ_RESULT = "kQuizResultBean";
     public static final String KEY_QUESTION_NUMBER = "kQuestionsNumber";
+    public static final String KEY_SELECTED_ANSWER = "kSelectedAnswer";
 }
