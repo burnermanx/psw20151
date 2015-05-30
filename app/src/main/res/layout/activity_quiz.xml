@@ -60,16 +60,6 @@
                 android:gravity="center"
                 android:layout_gravity="center"/>
         </LinearLayout>
-        <Button
-            android:id="@+id/quiz_send_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:text="Enviar"
-            android:visibility="gone"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"/>
-
         <com.viewpagerindicator.CirclePageIndicator
             android:id="@+id/indicator"
             android:padding="10dip"
@@ -77,5 +67,18 @@
             android:layout_width="fill_parent"
             android:layout_alignParentBottom="true"/>
     </RelativeLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/quiz_send_fab"
+        app:fabSize="normal"
+        app:borderWidth="0dp"
+        android:src="@drawable/check_all"
+        android:tint="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="16dp"
+        android:clickable="true"/>
 
 </RelativeLayout>

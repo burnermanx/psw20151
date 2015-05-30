@@ -2,13 +2,12 @@ package br.uniriotec.quizeducacional.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -17,7 +16,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -41,7 +41,7 @@ public class QuizActivity extends AppCompatActivity {
     @InjectView(R.id.activity_quiz_module_name) TextView mTextModuleName;
     @InjectView(R.id.activity_quiz_layout_empty) LinearLayout mEmptyLayout;
     @InjectView(R.id.quiz_toolbar) Toolbar mToolbar;
-    @InjectView(R.id.quiz_send_btn) Button mSendButton;
+    @InjectView(R.id.quiz_send_fab) FloatingActionButton mSendFab;
     @InjectView(R.id.indicator) CirclePageIndicator mIndicator;
     @InjectView(R.id.quiz_txt_end) TextView mTextEndQuiz;
 
@@ -49,6 +49,7 @@ public class QuizActivity extends AppCompatActivity {
     private List<QuestionBean> mQuestionList = QuestionGenerator.generateQuestionList();
     private QuizResultBean mQuizResultBean = new QuizResultBean();
     private boolean hideMenu;
+    private boolean fabExpanded;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,10 +128,46 @@ public class QuizActivity extends AppCompatActivity {
 
     private void handleSendButton() {
         if (mQuestionList.size() == mQuizResultBean.questionResults.size()) {
-            mSendButton.setVisibility(View.VISIBLE);
+            if (!fabExpanded) {
+                showFab();
+            }
         } else {
-            mSendButton.setVisibility(View.GONE);
+            //hideFab();
         }
+    }
+
+    private void showFab() {
+        ScaleAnimation expandAnimation = new ScaleAnimation(0.1f, 1, 0.1f, 1, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        expandAnimation.setFillAfter(true);
+        expandAnimation.setDuration(200);
+        mSendFab.setVisibility(View.VISIBLE);
+        mSendFab.startAnimation(expandAnimation);
+        fabExpanded = true;
+    }
+
+    private void hideFab() {
+        ScaleAnimation shrinkAnimation = new ScaleAnimation(1, 0, 1, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        shrinkAnimation.setFillAfter(true);
+        shrinkAnimation.setDuration(200);
+        shrinkAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                mSendFab.setVisibility(View.GONE);
+                mSendFab.clearAnimation();
+                fabExpanded = false;
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        mSendFab.startAnimation(shrinkAnimation);
     }
 
     private void showEmptyQuizView() {
@@ -139,7 +176,7 @@ public class QuizActivity extends AppCompatActivity {
         mTextEndQuiz.setText(message);
         hideMenu = true;
         mViewPager.setVisibility(View.GONE);
-        mSendButton.setVisibility(View.GONE);
+        hideFab();
         mIndicator.setVisibility(View.GONE);
         invalidateOptionsMenu();
         mEmptyLayout.setVisibility(View.VISIBLE);
@@ -160,7 +197,7 @@ public class QuizActivity extends AppCompatActivity {
         mEmptyLayout.setVisibility(View.GONE);
         invalidateOptionsMenu();
         mIndicator.setVisibility(View.VISIBLE);
-        mSendButton.setVisibility(View.VISIBLE);
+        mSendFab.setVisibility(View.VISIBLE);
         mViewPager.setVisibility(View.VISIBLE);
     }
 
@@ -180,7 +217,7 @@ public class QuizActivity extends AppCompatActivity {
         alertBuilder.show();
     }
 
-    @OnClick(R.id.quiz_send_btn) public void sendQuizResult() {
+    @OnClick(R.id.quiz_send_fab) public void sendQuizResult() {
         showConfirmationDialog();
     }
 
