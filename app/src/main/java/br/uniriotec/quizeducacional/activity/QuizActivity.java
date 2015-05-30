@@ -49,7 +49,6 @@ public class QuizActivity extends AppCompatActivity {
     private List<QuestionBean> mQuestionList = QuestionGenerator.generateQuestionList();
     private QuizResultBean mQuizResultBean = new QuizResultBean();
     private boolean hideMenu;
-    private boolean fabExpanded;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,11 +127,11 @@ public class QuizActivity extends AppCompatActivity {
 
     private void handleSendButton() {
         if (mQuestionList.size() == mQuizResultBean.questionResults.size()) {
-            if (!fabExpanded) {
+            if (mSendFab.getVisibility() != View.VISIBLE) {
                 showFab();
             }
         } else {
-            //hideFab();
+            hideFab();
         }
     }
 
@@ -140,26 +139,15 @@ public class QuizActivity extends AppCompatActivity {
         ScaleAnimation expandAnimation = new ScaleAnimation(0.1f, 1, 0.1f, 1, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         expandAnimation.setFillAfter(true);
         expandAnimation.setDuration(200);
-        mSendFab.setVisibility(View.VISIBLE);
-        mSendFab.startAnimation(expandAnimation);
-        fabExpanded = true;
-    }
-
-    private void hideFab() {
-        ScaleAnimation shrinkAnimation = new ScaleAnimation(1, 0, 1, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        shrinkAnimation.setFillAfter(true);
-        shrinkAnimation.setDuration(200);
-        shrinkAnimation.setAnimationListener(new Animation.AnimationListener() {
+        expandAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-
+                
             }
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                mSendFab.setVisibility(View.GONE);
-                mSendFab.clearAnimation();
-                fabExpanded = false;
+                mSendFab.setClickable(true);
             }
 
             @Override
@@ -167,7 +155,34 @@ public class QuizActivity extends AppCompatActivity {
 
             }
         });
-        mSendFab.startAnimation(shrinkAnimation);
+        mSendFab.setVisibility(View.VISIBLE);
+        mSendFab.startAnimation(expandAnimation);
+    }
+
+    private void hideFab() {
+        if (mSendFab.getVisibility() == View.VISIBLE) {
+            ScaleAnimation shrinkAnimation = new ScaleAnimation(1, 0, 1, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+            shrinkAnimation.setFillAfter(true);
+            shrinkAnimation.setDuration(200);
+            shrinkAnimation.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+                    mSendFab.setClickable(false);
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    mSendFab.setVisibility(View.GONE);
+                    mSendFab.clearAnimation();
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+            mSendFab.startAnimation(shrinkAnimation);
+        }
     }
 
     private void showEmptyQuizView() {
