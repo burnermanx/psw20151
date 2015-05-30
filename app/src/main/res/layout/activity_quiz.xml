@@ -8,7 +8,8 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/quiz_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:textColorPrimary="@color/abc_primary_text_material_dark"
         android:actionMenuTextColor="@color/abc_primary_text_material_dark"
@@ -71,7 +72,7 @@
         android:id="@+id/quiz_send_fab"
         app:fabSize="normal"
         app:borderWidth="0dp"
-        android:src="@drawable/check_all"
+        android:src="@drawable/ic_check_all_white_48dp"
         android:tint="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

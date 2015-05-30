@@ -1,6 +1,8 @@
 package br.uniriotec.quizeducacional.activity;
 
-import android.app.AlertDialog;
+import android.graphics.Color;
+import android.os.Build;
+import android.support.v7.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -25,6 +27,8 @@ import br.uniriotec.quizeducacional.model.QuestionResultBean;
 import br.uniriotec.quizeducacional.model.QuizResultBean;
 
 import butterknife.OnClick;
+
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.viewpagerindicator.CirclePageIndicator;
 import java.util.List;
 
@@ -56,6 +60,7 @@ public class QuizActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quiz);
         ButterKnife.inject(this);
         setSupportActionBar(mToolbar);
+        setToolbarPadding();
 
         mPagerAdapter = new SlidingPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mPagerAdapter);
@@ -142,7 +147,7 @@ public class QuizActivity extends AppCompatActivity {
         expandAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                
+
             }
 
             @Override
@@ -223,13 +228,38 @@ public class QuizActivity extends AppCompatActivity {
             }
         };
 
-        AlertDialog.Builder alertBuilder= new AlertDialog.Builder(this, R.style.AlertDialogStyle);
+        AlertDialog.Builder alertBuilder= new AlertDialog.Builder(this);
         alertBuilder.setTitle(getResources().getString(R.string.dialog_header_attention));
         alertBuilder.setMessage(getResources().getString(R.string.quiz_dialog_confirm_send));
         alertBuilder.setPositiveButton(getResources().getString(R.string.dialog_button_send),
-            positiveClick);
+                positiveClick);
         alertBuilder.setNegativeButton(getResources().getString(R.string.dialog_button_cancel), null);
         alertBuilder.show();
+    }
+
+    public int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = this.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = this.getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
+
+    public void setToolbarPadding() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+                // create our manager instance after the content view is set
+                SystemBarTintManager tintManager = new SystemBarTintManager(this);
+                // enable status bar tint
+                tintManager.setStatusBarTintEnabled(true);
+                // enable navigation bar tint
+                tintManager.setNavigationBarTintEnabled(true);
+                // set the transparent color of the status bar, 20% darker
+                tintManager.setTintColor(Color.parseColor("#20000000"));
+            }
+            mToolbar.setPadding(0, getStatusBarHeight(), 0, 0);
+        }
     }
 
     @OnClick(R.id.quiz_send_fab) public void sendQuizResult() {
