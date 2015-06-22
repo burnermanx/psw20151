@@ -38,15 +38,18 @@
         </activity>
         <activity
             android:name=".professor.ProfessorActivity"
-            android:label="@string/title_activity_professor" >
+            android:label="@string/title_activity_professor"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".aluno.AlunoActivity"
-            android:label="@string/title_activity_aluno" >
+            android:label="@string/title_activity_aluno"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".acesso.AcessoActivity"
-            android:label="@string/title_activity_acesso" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

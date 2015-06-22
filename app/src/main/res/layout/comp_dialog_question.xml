@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    >
+  <android.support.design.widget.TextInputLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="4dp"
+      >
+    <EditText
+        android:id="@+id/dialog_enunciado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enunciado"
+        />
+  </android.support.design.widget.TextInputLayout>
+  <android.support.design.widget.TextInputLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="4dp"
+      >
+    <EditText
+        android:id="@+id/dialog_resposta_correta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Resposta correta"
+        />
+  </android.support.design.widget.TextInputLayout>
+  <android.support.design.widget.TextInputLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="4dp"
+      >
+    <EditText
+        android:id="@+id/dialog_alternativa_dois"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Resposta alternativa 2"
+        />
+  </android.support.design.widget.TextInputLayout>
+  <android.support.design.widget.TextInputLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="4dp"
+      >
+    <EditText
+        android:id="@+id/dialog_alternativa_tres"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Resposta alternativa 3"
+        />
+  </android.support.design.widget.TextInputLayout>
+  <android.support.design.widget.TextInputLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="4dp"
+      >
+    <EditText
+        android:id="@+id/dialog_alternativa_quatro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Resposta alternativa 4"
+        />
+  </android.support.design.widget.TextInputLayout>
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      >
+    <Button
+        android:id="@+id/dialog_button_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salvar"
+        />
+    <Button
+        android:layout_toRightOf="@id/dialog_button_save"
+        android:id="@+id/dialog_button_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancelar"
+        />
+  </RelativeLayout>
+
+</LinearLayout>

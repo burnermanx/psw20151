@@ -106,21 +106,19 @@ public class QuestionFragment extends Fragment {
             //answer = savedInstanceState.getString(Keys.KEY_SELECTED_ANSWER, "");
             if (mResposta != null) {
                 answer = mResposta.respostaEnvidada;
-            }
-            if (answer == null) {
-                //answer = savedInstanceState.getString(Keys.KEY_SELECTED_ANSWER, "");
-            }
-            if (btnAnswer1.getText().toString().contentEquals(answer)) {
-                colorizeAnswer(btnAnswer1);
-            }
-            if (btnAnswer2.getText().toString().contentEquals(answer)) {
-                colorizeAnswer(btnAnswer2);
-            }
-            if (btnAnswer3.getText().toString().contentEquals(answer)) {
-                colorizeAnswer(btnAnswer3);
-            }
-            if (btnAnswer4.getText().toString().contentEquals(answer)) {
-                colorizeAnswer(btnAnswer4);
+
+                if (btnAnswer1.getText().toString().contentEquals(answer)) {
+                    colorizeAnswer(btnAnswer1);
+                }
+                if (btnAnswer2.getText().toString().contentEquals(answer)) {
+                    colorizeAnswer(btnAnswer2);
+                }
+                if (btnAnswer3.getText().toString().contentEquals(answer)) {
+                    colorizeAnswer(btnAnswer3);
+                }
+                if (btnAnswer4.getText().toString().contentEquals(answer)) {
+                    colorizeAnswer(btnAnswer4);
+                }
             }
 
 

@@ -28,6 +28,10 @@ public class QuestoesAdapter extends RecyclerView.Adapter<QuestoesAdapter.ViewHo
     return viewHolder;
   }
 
+  public void setDataset(List<Questao> mDataset) {
+    this.mDataset = mDataset;
+  }
+
   @Override public void onBindViewHolder(ViewHolder viewHolder, int i) {
     viewHolder.mTextView.setText(mDataset.get(i).enunciado);
   }
