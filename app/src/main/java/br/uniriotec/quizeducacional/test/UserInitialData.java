@@ -18,18 +18,18 @@ public class UserInitialData {
   public static void generateInitialData() {
     PersistanceWrapper persistance = PersistanceWrapper.getInstance();
 
-    Disciplina matematica = new Disciplina();
-    matematica.disciplinaId = 1;
-    matematica.nomeDisciplina = "Matemática";
-    matematica.save();
+
 
     Turma turma = new Turma();
     turma.nomeTurma = "501-M";
     turma.turmaId = 501;
-    int disciplinasSize = 0;
-    turma.disciplinas = new ArrayList<Disciplina>();
-    turma.disciplinas.add(0, matematica);
     turma.save();
+
+    Disciplina matematica = new Disciplina();
+    matematica.disciplinaId = 1;
+    matematica.nomeDisciplina = "Matemática";
+    matematica.turma = turma;
+    matematica.save();
 
 
     Usuario usuarioAluno = new Usuario();
