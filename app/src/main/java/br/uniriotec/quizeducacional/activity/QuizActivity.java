@@ -35,7 +35,7 @@ import java.util.List;
 import br.uniriotec.quizeducacional.R;
 import br.uniriotec.quizeducacional.fragment.QuestionFragment;
 import br.uniriotec.quizeducacional.model.QuestionBean;
-import br.uniriotec.quizeducacional.test.QuestionGenerator;
+import br.uniriotec.quizeducacional.test.QuestionScreenGenerator;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -50,7 +50,7 @@ public class QuizActivity extends AppCompatActivity {
     @InjectView(R.id.quiz_txt_end) TextView mTextEndQuiz;
 
     private PagerAdapter mPagerAdapter;
-    private List<QuestionBean> mQuestionList = QuestionGenerator.generateQuestionList();
+    private List<QuestionBean> mQuestionList = QuestionScreenGenerator.generateQuestionList();
     private QuizResultBean mQuizResultBean = new QuizResultBean();
     private boolean hideMenu;
 

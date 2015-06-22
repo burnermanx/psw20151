@@ -1,6 +1,5 @@
 package br.uniriotec.quizeducacional.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,7 +10,7 @@ import br.uniriotec.quizeducacional.constants.Keys;
 import br.uniriotec.quizeducacional.model.QuestionBean;
 import br.uniriotec.quizeducacional.model.QuestionResultBean;
 import br.uniriotec.quizeducacional.model.QuizResultBean;
-import br.uniriotec.quizeducacional.test.QuestionGenerator;
+import br.uniriotec.quizeducacional.test.QuestionScreenGenerator;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     ButterKnife.inject(this);
 
     //Gerando uma lista de 4 questões de matemática
-    List<QuestionBean> questionList = QuestionGenerator.generateQuestionList();
+    List<QuestionBean> questionList = QuestionScreenGenerator.generateQuestionList();
 
     Bundle extras = getIntent().getExtras();
     QuestionBean question;

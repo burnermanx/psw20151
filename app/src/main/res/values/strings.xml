@@ -12,5 +12,8 @@
     <string name="dialog_header_attention">Atenção</string>
     <string name="dialog_button_send">Enviar</string>
     <string name="dialog_button_cancel">Cancelar</string>
+  <string name="title_activity_professor">Professor</string>
+  <string name="title_activity_aluno">Aluno</string>
+  <string name="title_activity_acesso">Acesso</string>
 
 </resources>

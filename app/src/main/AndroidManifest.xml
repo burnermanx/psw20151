@@ -3,25 +3,50 @@
     package="br.uniriotec.quizeducacional" >
 
     <application
+        android:name=".QuizApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="DATABASE"
+            android:value="wiggle_wiggle.db" />
+        <meta-data
+            android:name="VERSION"
+            android:value="1" />
+        <meta-data
+            android:name="QUERY_LOG"
+            android:value="true" />
+        <meta-data
+            android:name="DOMAIN_PACKAGE_NAME"
+            android:value="br.uniriotec.quizeducacional.persistance.domain" />
+
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activity.ResultActivity"
             android:label="@string/title_activity_result"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activity.QuizActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".professor.ProfessorActivity"
+            android:label="@string/title_activity_professor" >
+        </activity>
+        <activity
+            android:name=".aluno.AlunoActivity"
+            android:label="@string/title_activity_aluno" >
+        </activity>
+        <activity
+            android:name=".acesso.AcessoActivity"
+            android:label="@string/title_activity_acesso" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
