@@ -31,12 +31,14 @@ import java.security.NoSuchAlgorithmException;
  * A placeholder fragment containing a simple view.
  */
 public class AcessoFragment extends Fragment {
-
   @InjectView(R.id.access_ed_login) EditText mLogin;
   @InjectView(R.id.access_ed_password) EditText mPassword;
-  @InjectView(R.id.access_toolbar) Toolbar mToolbar;
 
   public AcessoFragment() {
+  }
+
+  public static AcessoFragment getInstance() {
+    return new AcessoFragment();
   }
 
   @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,9 +49,6 @@ public class AcessoFragment extends Fragment {
       PreferencesWrapper.getInstance(getActivity()).setFirstTimeUse(false);
       UserInitialData.generateInitialData();
     }
-    ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
-    getActivity().setTitle("Quiz Educacional");
-    UiUtils.setToolbarPadding(getActivity(), mToolbar);
     return view;
   }
 

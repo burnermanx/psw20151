@@ -7,21 +7,7 @@
     android:orientation="vertical"
     >
 
-  <android.support.v7.widget.Toolbar
-      android:id="@+id/access_toolbar"
-      android:layout_width="match_parent"
-      android:minHeight="?attr/actionBarSize"
-      android:layout_height="wrap_content"
-      android:background="?attr/colorPrimary"
-      android:textColorPrimary="@color/abc_primary_text_material_dark"
-      android:actionMenuTextColor="@color/abc_primary_text_material_dark"
-      android:textColorSecondary="@color/abc_secondary_text_material_dark"
-      app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-      app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-      />
-
     <TextView
-        android:layout_below="@id/access_toolbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Entrar"
@@ -30,7 +16,6 @@
         />
 
   <LinearLayout
-      android:layout_below="@id/access_toolbar"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:padding="16dp"

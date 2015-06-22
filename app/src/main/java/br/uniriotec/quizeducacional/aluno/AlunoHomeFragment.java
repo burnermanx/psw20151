@@ -1,4 +1,4 @@
-package br.uniriotec.quizeducacional.professor;
+package br.uniriotec.quizeducacional.aluno;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -8,44 +8,54 @@ import android.view.ViewGroup;
 import br.uniriotec.quizeducacional.R;
 import br.uniriotec.quizeducacional.constants.Keys;
 import br.uniriotec.quizeducacional.persistance.PersistanceWrapper;
-import br.uniriotec.quizeducacional.persistance.domain.Professor;
+import br.uniriotec.quizeducacional.persistance.domain.Aluno;
+import br.uniriotec.quizeducacional.persistance.domain.Turma;
 import br.uniriotec.quizeducacional.persistance.domain.Usuario;
 import butterknife.ButterKnife;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class ProfessorHomeFragment extends Fragment {
-  private static ProfessorHomeFragment instance;
-  private Professor professor;
+public class AlunoHomeFragment extends Fragment {
+  private static AlunoHomeFragment instance;
   private Usuario usuario;
+  private Aluno aluno;
+  private Turma turma;
+  private PersistanceWrapper perst;
 
-  public ProfessorHomeFragment() {
+  public AlunoHomeFragment() {
   }
 
   @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.fragment_professor_home, container, false);
+    View view = inflater.inflate(R.layout.fragment_aluno_home, container, false);
     ButterKnife.inject(this, view);
-    getProfessorData();
+    perst = PersistanceWrapper.getInstance();
+    getAlunoData();
     return view;
   }
 
-  public ProfessorHomeFragment getInstance(String username) {
+  public static AlunoHomeFragment getInstance(String username) {
+    instance = new AlunoHomeFragment();
     Bundle args = new Bundle();
     args.putString(Keys.KEY_USERNAME, username);
     instance.setArguments(args);
     return instance;
   }
 
-  private void getProfessorData() {
+  private void getAlunoData() {
     Bundle args = getArguments();
     if (args.containsKey(Keys.KEY_USERNAME)) {
       String username = args.getString(Keys.KEY_USERNAME);
       if (username != null && username.length() > 0) {
-        usuario = PersistanceWrapper.getInstance().getUsuario(username);
-        professor = PersistanceWrapper.getInstance().getProfessor(usuario.getId());
+        usuario = perst.getUsuario(username);
+        aluno = perst.getAluno(usuario.getId());
+        turma = aluno.turma;
       }
     }
+  }
+
+  private String getName() {
+    return String.valueOf(usuario.nome) + " " + String.valueOf(usuario.sobrenome);
   }
 }

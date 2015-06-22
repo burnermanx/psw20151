@@ -9,14 +9,16 @@ import java.util.List;
 public class Disciplina extends SugarRecord {
   public int disciplinaId;
   public String nomeDisciplina;
-  List<Modulo> modulos;
+  public Turma turma;
+  public Professor professor;
 
   public Disciplina() {
   }
 
-  public Disciplina(int disciplinaId, String nomeDisciplina, List<Modulo> modulos) {
+  public Disciplina(int disciplinaId, String nomeDisciplina, Turma turma, Professor professor) {
     this.disciplinaId = disciplinaId;
     this.nomeDisciplina = nomeDisciplina;
-    this.modulos = modulos;
+    this.turma = turma;
+    this.professor = professor;
   }
 }

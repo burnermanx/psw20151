@@ -6,14 +6,16 @@ package br.uniriotec.quizeducacional.persistance.domain;
 import com.orm.SugarRecord;
 public class Resposta extends SugarRecord {
   public Aluno aluno;
+  public Modulo modulo;
   public Questao questao;
   public String respostaEnvidada;
 
   public Resposta() {
   }
 
-  public Resposta(Aluno aluno, Questao questao, String respostaEnvidada) {
+  public Resposta(Aluno aluno, Modulo modulo, Questao questao, String respostaEnvidada) {
     this.aluno = aluno;
+    this.modulo = modulo;
     this.questao = questao;
     this.respostaEnvidada = respostaEnvidada;
   }
