@@ -6,9 +6,9 @@ package br.uniriotec.quizeducacional.persistance.domain;
 import com.orm.SugarRecord;
 import com.orm.dsl.Unique;
 public class Usuario extends SugarRecord {
-  public int matricula;
   public int telefone;
   public int idade;
+  public String matricula;
   @Unique
   public String username;
   public String senha;
@@ -25,12 +25,12 @@ public class Usuario extends SugarRecord {
   public Usuario() {
   }
 
-  public Usuario(int matricula, int telefone, int idade, String username, String senha, String nome,
-      String sobrenome, String posnome, String email, boolean ativo, boolean aluno,
+  public Usuario(int telefone, int idade, String matricula, String username, String senha,
+      String nome, String sobrenome, String posnome, String email, boolean ativo, boolean aluno,
       boolean professor, boolean coordenador, boolean diretor) {
-    this.matricula = matricula;
     this.telefone = telefone;
     this.idade = idade;
+    this.matricula = matricula;
     this.username = username;
     this.senha = senha;
     this.nome = nome;

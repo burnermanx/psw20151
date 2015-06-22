@@ -83,7 +83,7 @@ public class QuizActivity extends AppCompatActivity {
             modulo = persist.getModulo(extras.getLong(Keys.KEY_MODULE));
             disciplina = persist.getDisciplina(extras.getLong(Keys.KEY_DISCIPLINA));
             mTextModuleName.setText(disciplina.nomeDisciplina + " - " + modulo.nomeModulo);
-            questoes = persist.getModuloQuestions(modulo.getId(), disciplina.getId());
+            questoes = persist.getModuloQuestions(turma.getId(), disciplina.getId(), modulo.getId());
         }
 
         mPagerAdapter = new SlidingPagerAdapter(getSupportFragmentManager());

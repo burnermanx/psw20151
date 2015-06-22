@@ -16,16 +16,15 @@
         >
 
         <TextView
-            android:id="@+id/professor_hello"
-            android:text="OLA FULANO!"
+            android:id="@+id/modulo_disicplina"
+            android:text="DISCIPLINA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="24dp"
             android:layout_marginBottom="4dp"
             />
         <TextView
-            android:id="@+id/professor_text"
-            android:text="Selecione sua disciplina"
+            android:text="Selecione um módulo para criar uma nova pergunta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16dp"
@@ -35,7 +34,7 @@
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/professor_turmas_list"
+        android:id="@+id/professor_modulos_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />

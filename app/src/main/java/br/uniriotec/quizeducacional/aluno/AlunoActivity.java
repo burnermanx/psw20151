@@ -44,5 +44,4 @@ public class AlunoActivity extends BaseActivity {
     intent.putExtras(bundle);
     startActivity(intent);
   }
-
 }

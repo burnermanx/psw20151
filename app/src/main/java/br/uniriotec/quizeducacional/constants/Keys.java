@@ -20,6 +20,7 @@ public class Keys {
     public static final String KEY_TURMA = "kTurma";
     public static final String KEY_DISCIPLINA = "kDisciplina";
     public static final String KEY_QUESTAO = "kQuestao";
+    public static final String KEY_PROFESSOR = "kProfessor";
 
     //Chaves de preferences
     public static final String KEY_PREF_FIRST_USE = "kPrefFirstUse";

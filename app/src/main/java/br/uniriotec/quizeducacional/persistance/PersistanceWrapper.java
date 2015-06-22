@@ -81,6 +81,22 @@ public class PersistanceWrapper {
     return Professor.findById(Professor.class, professorId);
   }
 
+  public Aluno getAlunoByUser(long userId) {
+    List<Aluno> result = Aluno.find(Aluno.class, "usuario = ?", String.valueOf(userId));
+    if (result != null && result.size() > 0) {
+      return result.get(0);
+    }
+    return null;
+  }
+
+  public Professor getProfessorByUser(long userId) {
+    List<Professor> result = Professor.find(Professor.class, "usuario = ?", String.valueOf(userId));
+    if (result != null && result.size() > 0) {
+      return result.get(0);
+    }
+    return null;
+  }
+
   public Modulo getModulo(long moduloId) {
     return Modulo.findById(Modulo.class, moduloId);
   }
@@ -109,14 +125,14 @@ public class PersistanceWrapper {
 
   public Usuario getUsuario(String username) {
     List<Usuario> result;
-    result = Usuario.find(Usuario.class, "username = ?", username);
+    result = Usuario.find(Usuario.class, "matricula = ? or email = ?", username, username);
     if (result != null && result.size() > 0) {
       return result.get(0);
     }
     return null;
   }
 
-  public List<Questao> getModuloQuestions(long moduloId, long disciplinaId) {
+  public List<Questao> getModuloQuestions(long turmaId, long disciplinaId, long moduloId) {
     Modulo modulo = getModulo(moduloId);
     Disciplina disciplina = getDisciplina(disciplinaId);
     List<Questao> result;

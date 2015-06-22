@@ -62,11 +62,11 @@ public class AcessoFragment extends Fragment {
       Usuario usuario = PersistanceWrapper.getInstance().getUsuario(login);
       if (usuario != null) {
         password = CryptUtils.sha1Hash(password);
-        if (usuario.username.contentEquals(login) && usuario.senha.contentEquals(password)) {
+        if ((usuario.matricula.contentEquals(login) || usuario.email.contentEquals(login)) && usuario.senha.contentEquals(password)) {
           if (usuario.aluno) {
-            launchAlunoActivity(usuario.username);
+            launchAlunoActivity(login);
           } else if (usuario.professor) {
-            launchProfessorActivity(usuario.username);
+            launchProfessorActivity(login);
           }
         } else {
           showWrongUserPassDialog();

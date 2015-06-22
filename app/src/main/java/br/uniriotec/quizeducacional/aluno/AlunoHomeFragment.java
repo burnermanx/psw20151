@@ -76,7 +76,7 @@ public class AlunoHomeFragment extends Fragment {
       String username = args.getString(Keys.KEY_USERNAME);
       if (username != null && username.length() > 0) {
         usuario = perst.getUsuario(username);
-        aluno = perst.getAluno(usuario.getId());
+        aluno = perst.getAlunoByUser(usuario.getId());
         turma = aluno.turma;
         disciplinas = perst.getDisciplinasTurma(turma.getId());
         mAlunoHeader.setText("Olá " + getName() + "!");

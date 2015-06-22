@@ -48,7 +48,7 @@ public class UserInitialData {
     usuarioAluno.ativo = true;
     usuarioAluno.email = "aluno@wigglewiggle.com";
     usuarioAluno.idade = 15;
-    usuarioAluno.matricula = 201501001;
+    usuarioAluno.matricula = "201501001";
     usuarioAluno.nome = "João";
     usuarioAluno.sobrenome = "Silva";
     usuarioAluno.posnome = "Santos";
@@ -62,7 +62,7 @@ public class UserInitialData {
     usuarioProfessor.ativo = true;
     usuarioProfessor.email = "professor@wigglewiggle.com";
     usuarioProfessor.idade = 45;
-    usuarioProfessor.matricula = 3001;
+    usuarioProfessor.matricula = "20150218";
     usuarioProfessor.nome = "Roberto";
     usuarioProfessor.sobrenome = "Jefferson";
     usuarioProfessor.posnome = "Andrade";
