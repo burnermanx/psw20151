@@ -23,9 +23,16 @@ import android.view.animation.ScaleAnimation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import br.uniriotec.quizeducacional.constants.Keys;
 import br.uniriotec.quizeducacional.model.QuestionResultBean;
 import br.uniriotec.quizeducacional.model.QuizResultBean;
 
+import br.uniriotec.quizeducacional.persistance.PersistanceWrapper;
+import br.uniriotec.quizeducacional.persistance.domain.Aluno;
+import br.uniriotec.quizeducacional.persistance.domain.Disciplina;
+import br.uniriotec.quizeducacional.persistance.domain.Modulo;
+import br.uniriotec.quizeducacional.persistance.domain.Questao;
+import br.uniriotec.quizeducacional.persistance.domain.Turma;
 import butterknife.OnClick;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
@@ -53,14 +60,31 @@ public class QuizActivity extends AppCompatActivity {
     private List<QuestionBean> mQuestionList = QuestionScreenGenerator.generateQuestionList();
     private QuizResultBean mQuizResultBean = new QuizResultBean();
     private boolean hideMenu;
+    private Aluno aluno;
+    private Modulo modulo;
+    private Disciplina disciplina;
+    private List<Questao> questoes;
+    private Turma turma;
+    private PersistanceWrapper persist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
         ButterKnife.inject(this);
+        persist = PersistanceWrapper.getInstance();
         setSupportActionBar(mToolbar);
         setToolbarPadding();
+
+        Bundle extras = getIntent().getExtras();
+        if (extras.containsKey(Keys.KEY_ALUNO)) {
+            aluno = persist.getAluno(extras.getLong(Keys.KEY_ALUNO));
+            turma = persist.getTurma(extras.getLong(Keys.KEY_TURMA));
+            modulo = persist.getModulo(extras.getLong(Keys.KEY_MODULE));
+            disciplina = persist.getDisciplina(extras.getLong(Keys.KEY_DISCIPLINA));
+            mTextModuleName.setText(disciplina.nomeDisciplina + " - " + modulo.nomeModulo);
+            questoes = persist.getModuloQuestions(modulo.getId(), disciplina.getId());
+        }
 
         mPagerAdapter = new SlidingPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mPagerAdapter);
@@ -276,12 +300,12 @@ public class QuizActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return QuestionFragment.getFragment(mQuestionList.get(position));
+            return QuestionFragment.getFragment(aluno.getId(), modulo.getId(), questoes.get(position).getId());
         }
 
         @Override
         public int getCount() {
-            return mQuestionList.size();
+            return questoes.size();
         }
 
         @Override

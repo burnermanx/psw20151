@@ -13,9 +13,13 @@ public class Keys {
     public static final String KEY_SELECTED_ANSWER = "kSelectedAnswer";
 
 
-    public static final String KEY_MODULE_ID = "kModuleId";
+    public static final String KEY_MODULE = "kModuleId";
     public static final String KEY_USERNAME = "kUsername";
     public static final String KEY_PASSWORD = "kPassword";
+    public static final String KEY_ALUNO = "kAluno";
+    public static final String KEY_TURMA = "kTurma";
+    public static final String KEY_DISCIPLINA = "kDisciplina";
+    public static final String KEY_QUESTAO = "kQuestao";
 
     //Chaves de preferences
     public static final String KEY_PREF_FIRST_USE = "kPrefFirstUse";

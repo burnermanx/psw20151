@@ -17,7 +17,8 @@ import java.util.List;
 public class PersistanceWrapper {
   private static PersistanceWrapper instance;
 
-  private PersistanceWrapper() {}
+  private PersistanceWrapper() {
+  }
 
   public static PersistanceWrapper getInstance() {
     if (instance == null) {
@@ -26,29 +27,37 @@ public class PersistanceWrapper {
     return instance;
   }
 
-  public void setResposta(long alunoId, long moduloId, long questaoId, long respostaId, String respostaEnviada) {
-    Resposta resposta = getResposta(respostaId);
-    if (resposta == null) {
-      Aluno aluno = getAluno(alunoId);
-      Questao questao = getQuestao(questaoId);
-      Modulo modulo = getModulo(moduloId);
-      resposta = new Resposta(aluno, modulo, questao, respostaEnviada);
-    } else {
-      resposta.respostaEnvidada = respostaEnviada;
-    }
+  public void setResposta(long alunoId, long moduloId, long questaoId, long respostaId,
+      String respostaEnviada) {
+    Resposta resposta = getResposta(alunoId, respostaId);
+    resposta.respostaEnvidada = respostaEnviada;
     resposta.save();
   }
 
-  public void setQuestao(long professorId, boolean discursiva, String enunciado, String respostaCorreta,
-      String respostaAlternativa2, String respostaAlternativa3, String respostaAlternativa4, long moduloId) {
+  public void setNovaResposta(long alunoId, long moduloId, long questaoId, String respostaEnviada) {
+    Resposta resposta;
+    Aluno aluno = getAluno(alunoId);
+    Questao questao = getQuestao(questaoId);
+    Modulo modulo = getModulo(moduloId);
+    resposta = new Resposta(aluno, modulo, questao, respostaEnviada);
+    resposta.save();
+  }
+
+  public void setQuestao(long professorId, boolean discursiva, String enunciado,
+      String respostaCorreta, String respostaAlternativa2, String respostaAlternativa3,
+      String respostaAlternativa4, long moduloId, long disciplinaId) {
     Professor professor = getProfessor(professorId);
     Modulo modulo = getModulo(moduloId);
-    Questao questao = new Questao(discursiva, professor, enunciado, respostaCorreta, respostaAlternativa2, respostaAlternativa3, respostaAlternativa4, modulo);
+    Disciplina disciplina = getDisciplina(disciplinaId);
+    Questao questao =
+        new Questao(discursiva, professor, enunciado, respostaCorreta, respostaAlternativa2,
+            respostaAlternativa3, respostaAlternativa4, modulo, disciplina);
     questao.save();
   }
 
-  public void alterQuestao(long questaoId, boolean discursiva, String enunciado, String respostaCorreta,
-      String respostaAlternativa2, String respostaAlternativa3, String respostaAlternativa4) {
+  public void alterQuestao(long questaoId, boolean discursiva, String enunciado,
+      String respostaCorreta, String respostaAlternativa2, String respostaAlternativa3,
+      String respostaAlternativa4) {
     Questao questao = getQuestao(questaoId);
     questao.questaoDiscursiva = discursiva;
     questao.enunciado = enunciado;
@@ -84,8 +93,18 @@ public class PersistanceWrapper {
     return Questao.findById(Questao.class, questaoId);
   }
 
-  public Resposta getResposta(long respostaId) {
-    return Resposta.findById(Resposta.class, respostaId);
+  public Disciplina getDisciplina(long disciplinaId) {
+    return Disciplina.findById(Disciplina.class, disciplinaId);
+  }
+
+  public Resposta getResposta(long alunoId, long questaoId) {
+    List<Resposta> result =
+        Resposta.find(Resposta.class, "aluno = ? and questao = ?", String.valueOf(alunoId),
+            String.valueOf(questaoId));
+    if (result != null && result.size() > 0) {
+      return result.get(0);
+    }
+    return null;
   }
 
   public Usuario getUsuario(String username) {
@@ -97,10 +116,13 @@ public class PersistanceWrapper {
     return null;
   }
 
-  public List<Questao> getModuloQuestions(long moduloId) {
+  public List<Questao> getModuloQuestions(long moduloId, long disciplinaId) {
     Modulo modulo = getModulo(moduloId);
+    Disciplina disciplina = getDisciplina(disciplinaId);
     List<Questao> result;
-    result = Questao.find(Questao.class, "modulo = ?", String.valueOf(modulo.getId()));
+    result =
+        Questao.find(Questao.class, "modulo = ? and disciplina = ?", String.valueOf(modulo.getId()),
+            String.valueOf(disciplina.getId()));
     return result;
   }
 
@@ -111,9 +133,13 @@ public class PersistanceWrapper {
     return result;
   }
 
-
-
-
-
-
+  public List<Modulo> getModulosDisciplinasTurma(long disciplinaId, long turmaId) {
+    Turma turma = getTurma(turmaId);
+    Disciplina disciplina = getDisciplina(disciplinaId);
+    List<Modulo> result;
+    result =
+        Modulo.find(Modulo.class, "turma = ? and disciplina = ?", String.valueOf(turma.getId()),
+            String.valueOf(disciplina.getId()));
+    return result;
+  }
 }

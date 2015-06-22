@@ -14,9 +14,17 @@ import br.uniriotec.quizeducacional.R;
 import br.uniriotec.quizeducacional.activity.QuizActivity;
 import br.uniriotec.quizeducacional.constants.Keys;
 import br.uniriotec.quizeducacional.model.QuestionBean;
+import br.uniriotec.quizeducacional.persistance.PersistanceWrapper;
+import br.uniriotec.quizeducacional.persistance.domain.Aluno;
+import br.uniriotec.quizeducacional.persistance.domain.Disciplina;
+import br.uniriotec.quizeducacional.persistance.domain.Modulo;
+import br.uniriotec.quizeducacional.persistance.domain.Questao;
+import br.uniriotec.quizeducacional.persistance.domain.Resposta;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,11 +37,17 @@ public class QuestionFragment extends Fragment {
     @InjectView(R.id.question_answer4_btn) Button btnAnswer4;
     @InjectView(R.id.question_header_layout) LinearLayout headerLayout;
     @InjectView(R.id.question_header_text) TextView txtQuestion;
+    Questao questao;
+    Aluno aluno;
+    Modulo modulo;
+    List<Resposta> respostas;
+    Resposta mResposta;
     String answer;
     String rightAnswer;
     int questionValue;
     QuestionBean mQuestionBean;
     int mModuleColor;
+    PersistanceWrapper persist;
 
     public QuestionFragment() {
         // Required empty public constructor
@@ -47,12 +61,23 @@ public class QuestionFragment extends Fragment {
         return fragment;
     }
 
+    public static QuestionFragment getFragment(long alunoId, long moduleId, long questionId) {
+        QuestionFragment fragment = new QuestionFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(Keys.KEY_QUESTAO, questionId);
+        args.putSerializable(Keys.KEY_MODULE, moduleId);
+        args.putSerializable(Keys.KEY_ALUNO, alunoId);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_question, container, false);
         ButterKnife.inject(this, view);
+        persist = PersistanceWrapper.getInstance();
 
         mModuleColor = getActivity().getResources().getColor(R.color.math_primary_color);
         headerLayout.setBackgroundColor(mModuleColor);
@@ -62,11 +87,29 @@ public class QuestionFragment extends Fragment {
             if (extras.containsKey(Keys.KEY_QUESTION_BEAN)) {
                 mQuestionBean = (QuestionBean) extras.getSerializable(Keys.KEY_QUESTION_BEAN);
                 makeQuestionScreen(mQuestionBean);
+            } else if (extras.containsKey(Keys.KEY_QUESTAO)) {
+                aluno = persist.getAluno(extras.getLong(Keys.KEY_ALUNO));
+                modulo = persist.getModulo(extras.getLong(Keys.KEY_MODULE));
+                questao = persist.getQuestao(extras.getLong(Keys.KEY_QUESTAO));
+                List<String> answers = new ArrayList<>();
+                answers.add(questao.alternativaQuatro);
+                answers.add(questao.alternativaDois);
+                answers.add(questao.respostaCorreta);
+                answers.add(questao.alternativaTres);
+                mQuestionBean = new QuestionBean(questao.questaoId, questao.enunciado, questao.respostaCorreta, answers, 10);
+                mResposta = persist.getResposta(aluno.getId(), questao.getId());
+                makeQuestionScreen(mQuestionBean);
             }
         }
 
-        if (savedInstanceState != null) {
-            answer = savedInstanceState.getString(Keys.KEY_SELECTED_ANSWER, "");
+
+            //answer = savedInstanceState.getString(Keys.KEY_SELECTED_ANSWER, "");
+            if (mResposta != null) {
+                answer = mResposta.respostaEnvidada;
+            }
+            if (answer == null) {
+                //answer = savedInstanceState.getString(Keys.KEY_SELECTED_ANSWER, "");
+            }
             if (btnAnswer1.getText().toString().contentEquals(answer)) {
                 colorizeAnswer(btnAnswer1);
             }
@@ -79,7 +122,7 @@ public class QuestionFragment extends Fragment {
             if (btnAnswer4.getText().toString().contentEquals(answer)) {
                 colorizeAnswer(btnAnswer4);
             }
-        }
+
 
         return view;
     }
@@ -107,7 +150,14 @@ public class QuestionFragment extends Fragment {
         decolorizeButtons();
         colorizeAnswer(button);
         answer = button.getText().toString();
-        ((QuizActivity)getActivity()).insertAnswer(mQuestionBean.getQid(), mQuestionBean.getRightAnswer(), answer, mQuestionBean.getQuestionValue());
+        if (mResposta != null) {
+            persist.setResposta(aluno.getId(), modulo.getId(), questao.getId(), mResposta.getId(),
+                answer);
+        } else {
+            persist.setNovaResposta(aluno.getId(), modulo.getId(), questao.getId(), answer);
+        }
+
+        //((QuizActivity)getActivity()).insertAnswer(mQuestionBean.getQid(), mQuestionBean.getRightAnswer(), answer, mQuestionBean.getQuestionValue());
         //((QuizActivity)getActivity()).removeCurrentQuestion();
     }
 

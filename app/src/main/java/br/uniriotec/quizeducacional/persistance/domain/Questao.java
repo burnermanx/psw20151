@@ -14,13 +14,14 @@ public class Questao extends SugarRecord {
   public String alternativaTres;
   public String alternativaQuatro;
   public Modulo modulo;
+  public Disciplina disciplina;
 
   public Questao() {
   }
 
   public Questao(boolean questaoDiscursiva, Professor professor, String enunciado,
       String respostaCorreta, String alternativaDois, String alternativaTres,
-      String alternativaQuatro, Modulo modulo) {
+      String alternativaQuatro, Modulo modulo, Disciplina disciplina) {
     this.questaoDiscursiva = questaoDiscursiva;
     this.professor = professor;
     this.enunciado = enunciado;
@@ -29,5 +30,6 @@ public class Questao extends SugarRecord {
     this.alternativaTres = alternativaTres;
     this.alternativaQuatro = alternativaQuatro;
     this.modulo = modulo;
+    this.disciplina = disciplina;
   }
 }

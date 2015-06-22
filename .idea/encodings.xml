@@ -4,6 +4,8 @@
     <file url="file://$PROJECT_DIR$/app/src/main/java/br/uniriotec/quizeducacional/acesso/AcessoFragment.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/br/uniriotec/quizeducacional/activity/MainActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/br/uniriotec/quizeducacional/activity/ResultActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/br/uniriotec/quizeducacional/aluno/AlunoHomeFragment.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/br/uniriotec/quizeducacional/aluno/AlunoModuleFragment.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/br/uniriotec/quizeducacional/test/QuestionScreenGenerator.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/br/uniriotec/quizeducacional/test/UserInitialData.java" charset="UTF-8" />
   </component>

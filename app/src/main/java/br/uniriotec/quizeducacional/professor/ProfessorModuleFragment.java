@@ -17,7 +17,7 @@ public class ProfessorModuleFragment extends Fragment {
 
   public static ProfessorModuleFragment getInstance(int idModulo) {
     Bundle args = new Bundle();
-    args.putInt(Keys.KEY_MODULE_ID, idModulo);
+    args.putInt(Keys.KEY_MODULE, idModulo);
     instance.setArguments(args);
     return instance;
   }
@@ -25,8 +25,8 @@ public class ProfessorModuleFragment extends Fragment {
   @Nullable @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     Bundle args = this.getArguments();
-    if (args.containsKey(Keys.KEY_MODULE_ID)) {
-      mModuleId = args.getInt(Keys.KEY_MODULE_ID);
+    if (args.containsKey(Keys.KEY_MODULE)) {
+      mModuleId = args.getInt(Keys.KEY_MODULE);
     }
     return super.onCreateView(inflater, container, savedInstanceState);
   }
